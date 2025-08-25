@@ -1,0 +1,190 @@
+{
+  "scopeName": "source.kui",
+  "name": "Kui",
+  "fileTypes": ["kui"],
+  "patterns": [
+    	{ "include": "#comments" },
+    	{ "include": "#strings" },
+    	{ "include": "#numbers" },
+    	{ "include": "#keywords" },
+	  	{ "include": "#specKeywords" },
+    	{ "include": "#types" },
+	  	{ "include": "#declKeywords" },
+	  	{ "include": "#funcIdentifiers" },
+	  	{ "include": "#varIdentifiers" },
+    	{ "include": "#classPubDecls" },
+    	{ "include": "#flags" },
+		{ "include": "#assignOprs" },
+		{ "include": "#arithOprss" },
+		{ "include": "#bitewiseOprs" },
+		{ "include": "#logicOprs" },
+		{ "include": "#compOprs" },
+		{ "include": "#threeWayCompOprs" },
+		{ "include": "#rangeOprs" },
+		{ "include": "#pointerOprs" }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        { "name": "comment.line.double-slash.kui", "match": "//.*$" },
+        {
+          "name": "comment.block.kui",
+          "begin": "/\\*",
+          "end": "\\*/",
+          "patterns": [{ "include": "#comments" }]
+        }
+      ]
+    },
+    "strings": {
+      	"patterns": [
+      	  	{ "name": "string.quoted.triple.kui", "begin": "`", "end": "`"},
+      	  	{ "name": "string.quoted.double.kui", "begin": "\"", "end": "\"", "patterns": [{ "match": "\\\\.", "name": "constant.character.escape.kui" }]},
+      	  	{ "name": "string.quoted.single.kui", "begin": "'", "end": "'", "patterns": [{ "match": "\\\\.", "name": "constant.character.escape.kui" }]}
+      	]
+    },
+
+    "numbers": {
+      	"patterns": [
+      	  	{ "name": "constant.numeric.kui", "match": "\\b(0x[0-9A-Fa-f]+|\\d+(?:\\.\\d+)?)\\b" }
+      	]
+    },
+
+    "declKeywords": {
+      	"patterns": [
+      	  	{
+      	  	  	"name": "storage.type.kui",
+      	  	  	"match": "\\b(àtiṣe|ìpín|àkànto|apẹ̀tẹ̀)\\b"
+      	  	}
+      	]
+    },
+
+    "classPubDecls": {
+	  	"patterns": [
+	  		{
+          	  "name": "storage.type.kui",
+          	  "match": "\\b(gbangba|àdáni)\\b\\s*;"
+          	}
+	  	]
+	},
+
+	"specKeywords": {
+	  	"patterns": [
+	  		{
+          	  	"name": "storage.type.kui",
+          	  	"match": "\\b(Titun|èyí)\\b"
+          	}
+	  	]
+	},
+
+    "keywords": {
+      	"patterns": [
+      	  {
+      	    	"name": "keyword.control.kui",
+      	    	"match": "\\b(lo|pe|kí|yí|sọ|pòrì|tí|ṣe|ṣé|fún|pàrọ̀|ibá|já|àìjẹ́bẹ̀|padà|pẹ̀lú)\\b"
+      	  }
+      	]
+    },
+
+    "types": {
+      	"patterns": [
+      	  {
+      	    	"name": "support.type.kui",
+      	    	"match": "\\b(8m|16m|32m|64m|128m|ìtó_m|8p|16p|32p|64p|128p|ìtó_p|8b|16b|32b|64b|128b|ìtó_b|oníwà|ọsán|ìdésì)\\b"
+      	  }
+      	]
+    },
+
+    "funcIdentifiers": {
+		"patterns": [
+      	  {
+      	    	"name": "entity.name.function.rust",
+      	    	"match": "\\b[\\p{L}_][\\p{L}\\p{M}\\p{N}_]*\\b(\\s*\\()"
+      	  }
+      	]
+    },
+
+	  "varIdentifiers": {
+		    "patterns": [
+      	  {
+      	    	"name": "variable.other.kui",
+      	    	"match": "\\b[\\p{L}_][\\p{L}\\p{M}\\p{N}_]*\\b(\\s*:)"
+      	  }
+      	]
+    },
+
+	"flags": {
+      	"patterns": [
+      	  	{
+      	  	  	"name": "keyword.control.directive.kui markup.italic.kui",
+      	  	  	"match": "(òde|pìkí|gbangba)"
+      	  	}
+      	]
+    },
+
+    "assignOprs": {
+      	"patterns": [
+      	  	{
+      	  	  	"name": "keyword.operator.assignment.kui",
+      	  	  	"match": "(=|\\+=|-=|\\*=|/=)"
+      	  	}
+      	]
+    },
+	"arithOprs": {
+      	"patterns": [
+      	  	{
+      	  	  	"name": "keyword.operator.arithmetic.kui",
+      	  	  	"match": "(\\+|-|\\*|/|%)"
+      	  	}
+      	]
+    },
+	"bitwiseOprs": {
+      	"patterns": [
+      	  	{
+      	  	  	"name": "keyword.operator.bitwise.kui",
+      	  	  	"match": "(&|\\||^|~|<<|>>)"
+      	  	}
+      	]
+    },
+	"logicOprs": {
+      	"patterns": [
+      	  	{
+      	  	  	"name": "keyword.operator.logical.kui",
+      	  	  	"match": "(&&|\\|\\||!)"
+      	  	}
+      	]
+    },
+	"compOprs": {
+      	"patterns": [
+      	  	{
+      	  	  	"name": "keyword.operator.comparison.kui",
+      	  	  	"match": "(=|!=|<|>|<=|>=)"
+      	  	}
+      	]
+    },
+	"threeWayCompOprs": {
+      	"patterns": [
+      	  	{
+      	  	  	"name": "keyword.operator.spaceship.kui",
+      	  	  	"match": "(<=>)"
+      	  	}
+      	]
+    },
+	"rangeOprs": {
+      	"patterns": [
+      	  	{
+      	  	  	"name": "keyword.operator.range.kui",
+      	  	  	"match": "(\\.\\.\\.)"
+      	  	}
+      	]
+    },
+	"pointerOprs": {
+      	"patterns": [
+      	  	{
+      	  	  	"name": "keyword.operator.pointer.kui",
+      	  	  	"match": "(#|@)"
+      	  	}
+      	]
+    }
+  }
+}
+

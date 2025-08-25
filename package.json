@@ -1,0 +1,34 @@
+{
+  	"name": "kui-language",
+  	"displayName": "Kui",
+  	"description": "Kui language support — syntax highlighting and basic IntelliSense.",
+  	"version": "0.2.0",
+  	"publisher": "you",
+  	"license": "MIT",
+  	"engines": { "vscode": "^1.70.0" },
+  	"activationEvents": ["onLanguage:kui"],
+  	"main": "./extension.js",
+  	"contributes": {
+  	  	"languages": [
+  	  	  	{
+  	  	  	  	"id": "kui",
+  	  	  	  	"aliases": ["Kui", "kui"],
+  	  	  	  	"extensions": [".kui"],
+  	  	  	  	"configuration": "./language-configuration.json"
+  	  	  	}
+  	  	],
+  	  	"grammars": [
+  	  	  	{
+  	  	  	  	"language": "kui",
+  	  	  	  	"scopeName": "source.kui",
+  	  	  	  	"path": "./syntaxes/kui.tmLanguage.json"
+  	  	  	}
+  	  	],
+  	  	"configurationDefaults": {
+  	  	  	"[kui]": {
+  	  	  	  	"editor.wordBasedSuggestions": false,
+  	  	  	  	"editor.suggest.showSnippets": false
+  	  	  	}
+  	  	}
+  	}
+}

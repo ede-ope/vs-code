@@ -1,0 +1,8 @@
+{ "include": "#assignOprs" },
+		{ "include": "#arithOprss" },
+		{ "include": "#bitewiseOprs" },
+		{ "include": "#logicOprs" },
+		{ "include": "#compOprs" },
+		{ "include": "#threeWayCompOprs" },
+		{ "include": "#rangeOprs" },
+		{ "include": "#pointerOprs" }
