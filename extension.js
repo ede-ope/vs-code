@@ -1,12 +1,13 @@
 const vscode = require('vscode');
 
 const KEYWORDS = [
-  "lo","àtiṣe","pe","kí","yí","sọ","ẹpín","ẹ̀wun","àkàsílẹ̀","pòòrì_tí","ṣe","fún","pàrọ̀","ẹjọ́","já","àìjẹ́bẹ̀","gbangba","àdáni","pìkí"
+  "lo","àtiṣe","pe","kí","yí","òǹsọ","ìpín","àkàntò","apẹ̀tẹ̀","pòòrì","tí","ṣe","fún","pàrọ̀","ẹjọ́","já","àìjẹ́bẹ̀","gbangba","àdáni","pìkí"
 ];
 
 const TYPES = [
-  "soso","aléfòó","àlọ́po","8w","16w","32w","64w","ìtó_w","8j","16j","32j","64j","ìtó_j",
-  "àjámì","ọsán","ìdésì","pooro","àdájọ́","àkókò","atọ́kàa","ohun"
+  "8m", "16m", "32m", "64m", "128m", "ìtó_m", "8p", "16p", "32p", "64p", "128p", "ìtó_p",
+  "8b","16b","32b","64b","128b","ìtó_b",
+  "oníwà","ọsán","ìdésì","ohun"
 ];
 
 function provideContextualCompletions(document, position) {
@@ -26,7 +27,7 @@ function provideContextualCompletions(document, position) {
 
   // If start of line or first non-whitespace char -> suggest top-level keywords
   if (/^\s*$/.test(before) || /^\s*[^\S\r\n]*$/.test(before)) {
-    KEYWORDS.filter(k => ["àtiṣe","lo","ẹpín","ẹ̀wun","kí"].includes(k)).forEach(k =>
+    KEYWORDS.filter(k => ["àtiṣe","lo","ẹpín","ẹ̀wun","kí","nínún"].includes(k)).forEach(k =>
       add(k, vscode.CompletionItemKind.Keyword, k, "Kui top-level keyword")
     );
     // Add import snippet
@@ -50,7 +51,7 @@ function provideContextualCompletions(document, position) {
   // Inside a block: suggest variable/print/loops
   if (/{\s*$/.test(before) || /^\s*[^\n]*\{\s*$/.test(before)) {
     add('kí (variable)', vscode.CompletionItemKind.Snippet, new vscode.SnippetString('kí ${1:soso} ${2:name} : ${3:expr};'), 'Variable declaration');
-    add('sọ (print)', vscode.CompletionItemKind.Snippet, new vscode.SnippetString('sọ ${1:expr};'), 'Print');
+    add('òǹsọ (print)', vscode.CompletionItemKind.Snippet, new vscode.SnippetString('òǹsọ ${1:expr};'), 'Print');
     add('pòrì (loop)', vscode.CompletionItemKind.Snippet, new vscode.SnippetString('pòrì (${1:cond}) {\n\t$0\n}'), 'loop');
   }
 
