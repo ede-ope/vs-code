@@ -7,7 +7,6 @@
     ["{", "}"],
     ["[", "]"],
     ["(", ")"],
-    ["?:", "?"],
   ],
   "autoClosingPairs": [
     { "open": "{", "close": "}" },
@@ -15,13 +14,8 @@
     { "open": "(", "close": ")" },
     { "open": "\"", "close": "\"" },
     { "open": "'", "close": "'" },
-    { "open": "?:", "close": "?" }
   ],
   "surroundingPairs": [
-    ["{", "}"], ["[", "]"], ["(", ")"], ["\"", "\""], ["'", "'"], ["?:", "?"]
+    ["{", "}"], ["[", "]"], ["(", ")"], ["\"", "\""], ["'", "'"]
   ],
-  "indentationRules": {
-    "increaseIndentPattern": "^(.*\\b(kí|yí|sọ||àtiṣe|ìpín|ẹ̀wun|apẹ̀tẹ̀|àkànto|ṣe|ṣé|pòòrì|tí)\\b.*|.*\\{[^\\}]*$)",
-    "decreaseIndentPattern": "^\\s*\\}"
-  }
 }

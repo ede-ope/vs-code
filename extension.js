@@ -1,13 +1,13 @@
 const vscode = require('vscode');
 
 const KEYWORDS = [
-  "lo","àtiṣe","pe","kí","yí","òǹsọ","ìpín","àkàntò","apẹ̀tẹ̀","pòòrì","tí","ṣe","fún","pàrọ̀","ẹjọ́","já","àìjẹ́bẹ̀","gbangba","àdáni","pìkí"
+  "lo","mú","gẹ́gẹ́bíi","àtiṣe","itú","pitú","kí","yí","òǹdẹ","òǹsọ","ìsọ","òǹgbọ́","ìgbọ́","ẹpín","ojúlèéjà","apẹ̀tẹ̀","pòrì","tí","ṣe","fún","pàrọ̀","ẹjọ́","já","àìjẹ́bẹ̀","gbangba","àdáni","pìkí","àtagbá"
 ];
 
 const TYPES = [
   "8m", "16m", "32m", "64m", "128m", "ìtó_m", "8p", "16p", "32p", "64p", "128p", "ìtó_p",
-  "8b","16b","32b","64b","128b","ìtó_b",
-  "oníwà","ọsán","ìdésì","ohun"
+  "8b","16b","32b","64b","128b","ìtó_b","òtítọ́","irọ́",
+  "àkàyọ","ọsán","bulì","ohun"
 ];
 
 function provideContextualCompletions(document, position) {
@@ -27,7 +27,7 @@ function provideContextualCompletions(document, position) {
 
   // If start of line or first non-whitespace char -> suggest top-level keywords
   if (/^\s*$/.test(before) || /^\s*[^\S\r\n]*$/.test(before)) {
-    KEYWORDS.filter(k => ["àtiṣe","lo","ẹpín","ẹ̀wun","kí","nínún"].includes(k)).forEach(k =>
+    KEYWORDS.filter(k => ["itú","lo","ẹpín","ojúlèéjà","kí","nínún"].includes(k)).forEach(k =>
       add(k, vscode.CompletionItemKind.Keyword, k, "Kui top-level keyword")
     );
     // Add import snippet

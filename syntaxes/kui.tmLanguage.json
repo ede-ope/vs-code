@@ -4,19 +4,22 @@
   	"fileTypes": ["kui"],
   	"patterns": [
 		{ "include": "#imports" },
+		{ "include": "#mods" },
+		{ "include": "#modEntries" },
     	{ "include": "#comments" },
     	{ "include": "#strings" },
     	{ "include": "#numbers" },
     	{ "include": "#keywords" },
 	  	{ "include": "#specKeywords" },
     	{ "include": "#types" },
+		{ "include": "#boolLiterals" },
 		{ "include": "#classIdentifiers" },
+		{ "include": "#enumDecls" },
 	  	{ "include": "#declKeywords" },
 		{ "include": "#tyIdentifiers" },
+		{ "include": "#macros" },
 	  	{ "include": "#funcIdentifiers" },
-	  	{ "include": "#varIdentifiers" },
     	{ "include": "#classPubDecls" },
-		{ "include": "#enumDecls" },
     	{ "include": "#flags" },
 		{ "include": "#assignOprs" },
 		{ "include": "#arithOprss" },
@@ -26,33 +29,55 @@
 		{ "include": "#threeWayCompOprs" },
 		{ "include": "#rangeOprs" },
 		{ "include": "#pointerOprs" },
-		{ "include": "#primitiveFuncs" }
+		{ "include": "#primitiveFuncs" },
+		{ "include": "#identifiers" }
   	],
   	"repository": {
 		"imports": {
 			"begin": "\\b(lo)",
     	  	"beginCaptures": {
-    	  	  	"1": { "name": "keyword.control.kui" }
+    	  	  	"1": { "name": "keyword.control.directive.kui" }
+    	  	},
+    	  	"end": ";|$",
+    	  	"patterns": [
+				{
+    	  	  	  "name": "entity.name.function.kui",
+				  "match": "\\b([\\p{L}_][\\p{L}\\p{M}\\p{N}_]*)\\b"
+    	  	  	}
+    	  	]
+		},
+
+		"mods": {
+			"begin": "\\b(mú)",
+    	  	"beginCaptures": {
+    	  	  	"1": { "name": "keyword.control.directive.kui" }
     	  	},
     	  	"end": ";|$",
     	  	"patterns": [
 				{
     	  	  	  "name": "keyword.control.kui",
-				  "match": "\\b(nínún)\\b"
+				  "match": "\\b(gẹ́gẹ́bíi)\\b"
     	  	  	},
 				{
-    	  	  	  "name": "entity.name.function.kui",
+    	  	  	  "name": "",
 				  "match": "\\b([\\p{L}_][\\p{L}\\p{M}\\p{N}_]*)\\b"
     	  	  	},
-				{
-    	  	  	  "name": "variable.other.kui",
-				  "match": "\\*"
-    	  	  	},
+				
 				{
     	  	  	  "include": "#strings"
     	  	  	}
     	  	]
 		},
+
+		"modEntries": {
+		  	"patterns": [
+		  		{
+    	      	  "name": "storage.type.kui",
+    	      	  "match": "\\b(lo|mú)\\b\\s*;"
+    	      	}
+		  	]
+		},
+
     	"comments": {
     	  "patterns": [
     	    { "name": "comment.line.double-slash.kui", "match": "//.*$" },
@@ -114,7 +139,7 @@
     	  	"patterns": [
     	  	  	{
     	  	  	  	"name": "storage.type.kui",
-    	  	  	  	"match": "\\b(àtiṣe|àkànto|ìpín)\\b"
+    	  	  	  	"match": "\\b(itú|ojúlèéjà|apẹ̀tẹ̀|ẹpín|àtagbá|òǹdẹ|ìdì)\\b"
     	  	  	}
     	  	]
     	},
@@ -150,7 +175,7 @@
     	  	"patterns": [
     	  	  	{
     	  	  	  	"name": "keyword.control.kui",
-    	  	  	  	"match": "\\b(lo|pe|kí|yí|pòrì|tí|ṣe|ṣé|fún|pàrọ̀|ibá|já|àìjẹ́bẹ̀|padà|nínún)\\b"
+    	  	  	  	"match": "\\b(gẹ́gẹ́bíi|pitú|kí|yí|pòrì|tí|ṣe|ṣé|fún|pàrọ̀|ibá|já|àìjẹ́bẹ̀|padà|nínún|di)\\b"
     	  	  	}
     	  	]
     	},
@@ -159,13 +184,22 @@
     	  	"patterns": [
     	  	  	{
     	  	  	  	"name": "support.type.kui",
-    	  	  	  	"match": "\\b(8m|16m|32m|64m|128m|ìtó_m|8p|16p|32p|64p|128p|ìtó_p|8b|16b|32b|64b|128b|ìtó_b|oníwà|ọsán|ìdésì)\\b"
+    	  	  	  	"match": "\\b(8m|16m|32m|64m|128m|ìtó_m|8p|16p|32p|64p|128p|ìtó_p|8b|16b|32b|64b|128b|ìtó_b|àkàyọ|ọsán|bulì|ohun)\\b"
     	  	  	}
     	  	]
     	},
 
+		"boolLiterals": {
+			"patterns": [
+    	  	  	{
+    	  	  	  	"name": "constant.language.boolean.kui markup.italic.kui",
+    	  	  	  	"match": "\\b(òtítọ́|irọ́)\\b"
+    	  	  	}
+    	  	]
+		},
+
 		"classIdentifiers": {
-			"begin": "\\b(ìpín)\\b\\s+(\\b([\\p{L}_][\\p{L}\\p{M}\\p{N}_]*)\\b)",
+			"begin": "\\b(ẹpín)\\b\\s+(\\b([\\p{L}_][\\p{L}\\p{M}\\p{N}_]*)\\b)",
     	  	"beginCaptures": {
     	  	  	"1": { "name": "storage.type.enum.kui" },
 				"2": { "name": "entity.name.class.kui" }
@@ -176,19 +210,37 @@
 
     	"funcIdentifiers": {
 			"patterns": [
-    	  	  {
+    	  	  	{
     	  	    	"name": "entity.name.function.kui",
     	  	    	"match": "\\b[\\p{L}_][\\p{L}\\p{M}\\p{N}_]*\\b(\\s*\\()"
-    	  	  }
+    	  	  	}
     	  	]
     	},
 
-		  "varIdentifiers": {
-			    "patterns": [
-    	  	  {
+		"macros": {
+			"begin": "(#)",
+    	  	"beginCaptures": {
+    	  	  	"1": { "name": "keyword.control.directive.kui" }
+    	  	},
+    	  	"end": "\\(|;|$",
+			"patterns": [
+				{
+    	  	    	"name": "entity.name.function.preprocessor.kui",
+    	  	    	"match": "\\b[\\p{L}_][\\p{L}\\p{M}\\p{N}_]*\\b"
+    	  	  	},
+    	  	  	{
+    	  	    	"name": "",
+    	  	    	"match": "\\s*"
+    	  	  	}
+    	  	]
+    	},
+
+		"identifiers": {
+			"patterns": [
+    	  		{
     	  	    	"name": "variable.other.kui",
-    	  	    	"match": "\\b[\\p{L}_][\\p{L}\\p{M}\\p{N}_]*\\b(\\s*:)"
-    	  	  }
+    	  	    	"match": "\\b[\\p{L}_][\\p{L}\\p{M}\\p{N}_]*\\b"
+    	  		}
     	  	]
     	},
 
@@ -205,7 +257,7 @@
     	  	"patterns": [
     	  	  	{
     	  	  	  	"name": "keyword.operator.assignment.kui",
-    	  	  	  	"match": "(=|\\+=|-=|\\*=|/=)"
+    	  	  	  	"match": "(\\+=|-=|\\*=)"
     	  	  	}
     	  	]
     	},
