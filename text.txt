@@ -1,0 +1,15 @@
+"funcTypes": {
+			"match": "\\b(itú)(\\s|$)+([\\p{L}_][\\p{L}\\p{M}\\p{N}_]*)",
+    	  	"captures": {
+    	  	  	"1": { "name": "markup.italic.kui storage.type.kui" },
+    	  	  	"3": { "name": "entity.name.type.kui" }
+    	  	}
+    	},
+
+		"varTypes": {
+			"match": "\\b(kí)(\\s|$)+([\\p{L}_][\\p{L}\\p{M}\\p{N}_]*)",
+    	  	"captures": {
+    	  	  	"1": { "name": "markup.italic.kui storage.type.kui" },
+    	  	  	"3": { "name": "entity.name.type.kui" }
+    	  	}
+    	},

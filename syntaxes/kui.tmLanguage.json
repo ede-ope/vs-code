@@ -3,24 +3,31 @@
   	"name": "Kui",
   	"fileTypes": ["kui"],
   	"patterns": [
-		{ "include": "#imports" },
-		{ "include": "#mods" },
+		{ "include": "#funcCustomTypes" },
+		{ "include": "#funcCustomTypes2" },
 		{ "include": "#modEntries" },
     	{ "include": "#comments" },
     	{ "include": "#strings" },
     	{ "include": "#numbers" },
-    	{ "include": "#keywords" },
+    	{ "include": "#flags" },
+		{ "include": "#macroDecls" },
+		{ "include": "#typeVariant" },
+    	{ "include": "#conFlowKeywords" },
 	  	{ "include": "#specKeywords" },
     	{ "include": "#types" },
 		{ "include": "#boolLiterals" },
-		{ "include": "#classIdentifiers" },
 		{ "include": "#enumDecls" },
+		{ "include": "#enumValType" },
+		{ "include": "#structDecls" },
+		{ "include": "#typeDecls" },
 	  	{ "include": "#declKeywords" },
+		{ "include": "#varKeywords" },
 		{ "include": "#tyIdentifiers" },
 		{ "include": "#macros" },
+		{ "include": "#funcTypeIdents" },
+		{ "include": "#TypeIdents" },
 	  	{ "include": "#funcIdentifiers" },
-    	{ "include": "#classPubDecls" },
-    	{ "include": "#flags" },
+		{ "include": "#storageKeywords" },
 		{ "include": "#assignOprs" },
 		{ "include": "#arithOprss" },
 		{ "include": "#bitewiseOprs" },
@@ -29,54 +36,26 @@
 		{ "include": "#threeWayCompOprs" },
 		{ "include": "#rangeOprs" },
 		{ "include": "#pointerOprs" },
-		{ "include": "#primitiveFuncs" },
+		{ "include": "#commands" },
+		{ "include": "#importFroms" },
 		{ "include": "#identifiers" }
   	],
   	"repository": {
-		"imports": {
-			"begin": "\\b(lo)",
-    	  	"beginCaptures": {
-    	  	  	"1": { "name": "keyword.control.directive.kui" }
-    	  	},
-    	  	"end": ";|$",
-    	  	"patterns": [
-				{
-    	  	  	  "name": "entity.name.function.kui",
-				  "match": "\\b([\\p{L}_][\\p{L}\\p{M}\\p{N}_]*)\\b"
-    	  	  	}
-    	  	]
-		},
-
-		"mods": {
-			"begin": "\\b(mú)",
-    	  	"beginCaptures": {
-    	  	  	"1": { "name": "keyword.control.directive.kui" }
-    	  	},
-    	  	"end": ";|$",
-    	  	"patterns": [
-				{
-    	  	  	  "name": "keyword.control.kui",
-				  "match": "\\b(gẹ́gẹ́bíi)\\b"
-    	  	  	},
-				{
-    	  	  	  "name": "",
-				  "match": "\\b([\\p{L}_][\\p{L}\\p{M}\\p{N}_]*)\\b"
-    	  	  	},
-				
-				{
-    	  	  	  "include": "#strings"
-    	  	  	}
-    	  	]
-		},
-
 		"modEntries": {
 		  	"patterns": [
 		  		{
-    	      	  "name": "storage.type.kui",
-    	      	  "match": "\\b(lo|mú)\\b\\s*;"
+    	      	  	"name": "keyword.control.import.kui",
+    	      	  	"match": "\\b(lo|mú)\\b"
     	      	}
 		  	]
 		},
+
+		"importFroms": {
+    	  	"match": "\\b(<-)\\s+([\\p{L}_][\\p{L}\\p{M}\\p{N}_]*)",
+			"captures": {
+    	  	  	"2": { "name": "entity.name.function.kui" }
+    	  	}
+    	},
 
     	"comments": {
     	  "patterns": [
@@ -89,9 +68,10 @@
     	    }
     	  ]
     	},
+		
     	"strings": {
     	  	"patterns": [
-    	  	  	{ "name": "string.quoted.triple.kui", "begin": "`", "end": "`"},
+				{ "name": "string.quoted.single.kui", "begin": "`", "end": "`", "patterns": [{ "match": "\\\\.", "name": "constant.character.escape.kui" }]},
     	  	  	{ "name": "string.quoted.double.kui", "begin": "\"", "end": "\"", "patterns": [{ "match": "\\\\.", "name": "constant.character.escape.kui" }]},
     	  	  	{ "name": "string.quoted.single.kui", "begin": "'", "end": "'", "patterns": [{ "match": "\\\\.", "name": "constant.character.escape.kui" }]}
     	  	]
@@ -104,87 +84,158 @@
     	},
 
 		"enumDecls": {
-			"begin": "\\b(apẹ̀tẹ̀)\\s+([\\p{L}_][\\p{L}\\p{M}\\p{N}_]*)",
+			"match": "\\b(apẹ̀rẹ̀)\\s+([\\p{L}_][\\p{L}\\p{M}\\p{N}_]*)",
+    	  	"captures": {
+    	  	  	"1": { "name": "storage.type.kui" },
+    	  	  	"2": { "name": "entity.name.type.kui" }
+    	  	}
+    	},
+
+		"enumValType": {
+			"match": "\\b([\\p{L}_][\\p{L}\\p{M}\\p{N}_]*)\\s+(::)",
+    	  	"captures": {
+    	  	  	"1": { "name": "entity.name.type.kui" }
+    	  	}
+    	},
+
+		"structDecls": {
+			"match": "\\b(àjọ)\\s+([\\p{L}_][\\p{L}\\p{M}\\p{N}_]*)",
+    	  	"captures": {
+    	  	  	"1": { "name": "storage.type.kui" },
+    	  	  	"2": { "name": "entity.name.type.kui" }
+    	  	}
+    	},
+
+		"TypeIdents": {
+			"match": "([\\p{L}_][\\p{L}\\p{M}\\p{N}_]*)\\s+([\\p{L}_][\\p{L}\\p{M}\\p{N}_]*)",
+    	  	"captures": {
+    	  	  	"1": { "name": "entity.name.type.kui" },
+    	  	  	"2": { "name": "variable.other.kui" }
+    	  	}
+    	},
+
+		"funcTypeIdents": {
+			"match": "([\\p{L}_][\\p{L}\\p{M}\\p{N}_]*)\\s+([\\p{L}_][\\p{L}\\p{M}\\p{N}_]*)\\s*(\\()",
+    	  	"captures": {
+    	  	  	"1": { "name": "entity.name.type.kui" },
+    	  	  	"2": { "name": "entity.name.function.kui" }
+    	  	}
+    	},
+
+		"typeDecls": {
+			"begin": "\\b(afárá)",
     	  	"beginCaptures": {
-    	  	  	"1": { "name": "storage.type.enum.kui" },
-    	  	  	"2": { "name": "entity.name.type.enum.kui" } 
+    	  	  	"1": { "name": "keyword.other.kui" }
     	  	},
-    	  	"end": "}",
+    	  	"end": "$|\\{|kárí|mú|lo|afárá|apẹ̀rẹ̀|àjọ|itú|ìríjú|kékeré|túmọ̀|ogún|#",
     	  	"patterns": [
 				{
-    	  	  	  "include": "#comments"
+    	  	  	  	"name": "keyword.control.kui",
+    	  	  	  	"match": "\\b(ṣe)\\b"
     	  	  	},
 				{
-    	  	  	  "include": "#flags"
-    	  	  	},
-    	  	  	{
-    	  	  	  "include": "#enumBody"
+    	  	  	  	"include": "#specKeywords"
     	  	  	},
 				{
-    	  	  	  "include": "#types"
-    	  	  	}
+					"include": "#types"
+				},
+				{
+					"include": "#flags"
+				},
+				{
+    	  	  	  "include": "#newType"
+    	  	  	},
+				{
+					"include": "#identifiers"
+				},
+				{
+					"include": "#comments"
+				}
     	  	]
     	},
 
-    	"enumBody": {
-    	  	"patterns": [
+		"newType": {
+			"patterns": [
     	  	  	{
-    	  	  	  	"match": "\\b([\\p{L}_][\\p{L}\\p{M}\\p{N}_]*)\\b",
-    	  	  	  	"name": "variable.other.enummember.kui"
-    	  	  	}
-    	  	]
+    	  	  	  	"match": "(sí)\\s+(\\b([\\p{L}_][\\p{L}\\p{M}\\p{N}_]*)\\b)",
+					"captures": {
+						"1": { "name": "storage.type.kui" },
+						"2": { "name": "entity.name.type.kui"}
+					}
+				}
+			]
+		},
+
+		"typeVariant": {
+			"match": "([\\p{L}_][\\p{L}\\p{M}\\p{N}_]*)s*\\{",
+    	  	"captures": {
+    	  	  	"1": { "name": "entity.name.function.kui" }
+    	  	}
     	},
 
-    	"declKeywords": {
+		"storageKeywords": {
+			"comments": "storage.type.enum.kui, keyword.other.kui",
     	  	"patterns": [
     	  	  	{
     	  	  	  	"name": "storage.type.kui",
-    	  	  	  	"match": "\\b(itú|ojúlèéjà|apẹ̀tẹ̀|ẹpín|àtagbá|òǹdẹ|ìdì)\\b"
+    	  	  	  	"match": "\\b(àjọ|apẹ̀rẹ̀)\\b"
+    	  	  	}
+    	  	]
+    	},
+		
+		"declKeywords": {
+			"comments": "storage.type.kui",
+    	  	"patterns": [
+    	  	  	{
+    	  	  	  	"name": "keyword.other.kui",
+    	  	  	  	"match": "\\b(itú|afárá|túmọ̀|pẹpẹ|òṣìṣẹ́|àfijọ|kékeré|adágún)\\b"
     	  	  	}
     	  	]
     	},
 
-    	"classPubDecls": {
-		  	"patterns": [
-		  		{
-    	      	  "name": "storage.type.kui",
-    	      	  "match": "\\b(gbangba|àdáni)\\b\\s*;"
-    	      	}
-		  	]
-		},
+		"varKeywords": {
+			"comments": "storage.type.kui",
+    	  	"patterns": [
+    	  	  	{
+    	  	  	  	"name": "markup.italic.kui keyword.declaration.kui",
+    	  	  	  	"match": "\\b(kárí|kí|ní|pitú)\\b"
+    	  	  	}
+    	  	]
+    	},
 
 		"specKeywords": {
 		  	"patterns": [
 		  		{
-    	      	  	"name": "variable.language.this.kui",
-    	      	  	"match": "\\b(èyí|nínún)\\b"
+    	      	  	"name": "variable.language.self.kui",
+    	      	  	"match": "\\b(òwun|àbájáde)\\b"
     	      	}
 		  	]
 		},
 
-		"primitiveFuncs": {
+		"commands": {
 			"patterns": [
     	  	  	{
-    	  	  	  	"name": "support.function.kui",
-    	  	  	  	"match": "\\b(òǹsọ|òǹgbọ́|pẹ̀lú)\\b"
+    	  	  	  	"name": "markup.italic.kui storage.type.kui",
+    	  	  	  	"match": "\\b(padà|tẹ̀síwájú|já|ré)\\b"
     	  	  	}
 			]
 		},
 
-    	"keywords": {
+    	"conFlowKeywords": {
     	  	"patterns": [
     	  	  	{
     	  	  	  	"name": "keyword.control.kui",
-    	  	  	  	"match": "\\b(gẹ́gẹ́bíi|pitú|kí|yí|pòrì|tí|ṣe|ṣé|fún|pàrọ̀|ibá|já|àìjẹ́bẹ̀|padà|nínún|di)\\b"
+    	  	  	  	"match": "\\b(gẹ́gẹ́bíi|dúróde|bẹ̀rẹ̀|yí|kó|pòrì|tí|àìjẹ́bẹ̀|ṣe|sí|fún|gbìyànjú|hán|ju|látinú|jọmọ́|níwọ̀bí|níbàámu|wo|jogún|tàṣé|máa_ṣa)\\b"
     	  	  	}
     	  	]
     	},
 
     	"types": {
+			"comment": "entity.name.type.kui, for custom types, support.type.kui for primitives",
     	  	"patterns": [
     	  	  	{
     	  	  	  	"name": "support.type.kui",
-    	  	  	  	"match": "\\b(8m|16m|32m|64m|128m|ìtó_m|8p|16p|32p|64p|128p|ìtó_p|8b|16b|32b|64b|128b|ìtó_b|àkàyọ|ọsán|bulì|ohun)\\b"
+    	  	  	  	"match": "\\b(8d|16d|32d|64d|128d|àtó_d|8p|16p|32p|64p|128p|àtó_p|8b|16b|32b|64b|128b|àtó_b|àkàyọ|ọsán|ǹjẹ́|ibùta|òfìfo|àṣàyàn|àyọrísí)\\b"
     	  	  	}
     	  	]
     	},
@@ -192,20 +243,10 @@
 		"boolLiterals": {
 			"patterns": [
     	  	  	{
-    	  	  	  	"name": "constant.language.boolean.kui markup.italic.kui",
-    	  	  	  	"match": "\\b(òtítọ́|irọ́)\\b"
+    	  	  	  	"name": "markup.italic.kui constant.language.boolean.kui",
+    	  	  	  	"match": "\\b(òtítọ́|irọ́|bóyá|agbede|àìwí|x86_64|arm|windows|linux|mac)\\b"
     	  	  	}
     	  	]
-		},
-
-		"classIdentifiers": {
-			"begin": "\\b(ẹpín)\\b\\s+(\\b([\\p{L}_][\\p{L}\\p{M}\\p{N}_]*)\\b)",
-    	  	"beginCaptures": {
-    	  	  	"1": { "name": "storage.type.enum.kui" },
-				"2": { "name": "entity.name.class.kui" }
-    	  	},
-    	  	"end": "\\s"
-    	  	
 		},
 
     	"funcIdentifiers": {
@@ -217,22 +258,21 @@
     	  	]
     	},
 
+		"macroDecls": {
+			"match": "\\b(kékeré)\\s+([\\p{L}_][\\p{L}\\p{M}\\p{N}_]*)",
+    	  	"captures": {
+    	  	  	"1": { "name": "storage.type.enum.kui" },
+    	  	  	"2": { "name": "entity.name.function.kui" }
+    	  	}
+    	},
+
 		"macros": {
-			"begin": "(#)",
-    	  	"beginCaptures": {
-    	  	  	"1": { "name": "keyword.control.directive.kui" }
-    	  	},
-    	  	"end": "\\(|;|$",
 			"patterns": [
 				{
     	  	    	"name": "entity.name.function.preprocessor.kui",
-    	  	    	"match": "\\b[\\p{L}_][\\p{L}\\p{M}\\p{N}_]*\\b"
-    	  	  	},
-    	  	  	{
-    	  	    	"name": "",
-    	  	    	"match": "\\s*"
+    	  	    	"match": "(#)\\b[\\p{L}_][\\p{L}\\p{M}\\p{N}_]*\\b"
     	  	  	}
-    	  	]
+			]
     	},
 
 		"identifiers": {
@@ -245,10 +285,11 @@
     	},
 
 		"flags": {
+			"comment": "keyword.operator.kui, keyword.control.directive.kui",
     	  	"patterns": [
     	  	  	{
-    	  	  	  	"name": "keyword.control.directive.kui markup.italic.kui",
-    	  	  	  	"match": "(òde|pìkí|gbangba)"
+    	  	  	  	"name": "markup.italic.kui keyword.other.kui",
+    	  	  	  	"match": "(hàn|gbangba|látòde|tóyí)"
     	  	  	}
     	  	]
     	},
@@ -273,15 +314,15 @@
     	  	"patterns": [
     	  	  	{
     	  	  	  	"name": "keyword.operator.bitwise.kui",
-    	  	  	  	"match": "(&|\\||^|~|<<|>>)"
+    	  	  	  	"match": "(\\^|~|<<|>>)"
     	  	  	}
     	  	]
     	},
 		"logicOprs": {
     	  	"patterns": [
     	  	  	{
-    	  	  	  	"name": "keyword.operator.logical.kui",
-    	  	  	  	"match": "(&&|\\|\\||!)"
+    	  	  	  	"name": "keyword.operator.Reference.kui",
+    	  	  	  	"match": "(&|\\*|\\||!)"
     	  	  	}
     	  	]
     	},
