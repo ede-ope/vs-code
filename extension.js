@@ -1,20 +1,20 @@
 const vscode = require('vscode');
 
 const KEYWORDS = [
-  "lo", "mú", "gẹ́gẹ́bíi", "òṣìṣẹ́", "itú", "adágún", "kí", "ní", "yí", "kó",
-  "kọ", "ka", "kékeré", "àjọ",
+  "lo", "mú", "nípè", "òṣìṣẹ́", "itú", "adágún", "kí", "ní", "yí", "kó",
+  "kọ", "ka", "kékeré", "ìrísí",
   "apẹ̀rẹ̀", "pòrì", "tí", "ṣe", "sí", "fún", "ré", "já", "wo",
   "àìjẹ́bẹ̀", "gbangba", "àdáni", "kárí", "jọmọ́", "òwun", "níwọ̀bí", "níbàámu",
   "tóyí", "látòde", "afárá", "àfijọ", "ju", "hàn", "gbìyànjú", "hán",
   "látinú", "túmọ̀", "ogún", "jogún", "pitú", "àbájáde", "àìwí",
   "x86_64", "arm", "windows", "linux", "mac", "pẹpẹ",
-  "dúróde", "bẹ̀rẹ̀", "tàṣé", "máa_ṣa", "ry", "àfipè", "ìtúpayá"
+  "dúróde", "bẹ̀rẹ̀", "tàṣé", "máa_ṣa", "ry", "àfipè", "ìtúpayá",
 ];
 
 const TYPES = [
   "8d", "16d", "32d", "64d", "128d", "àtó_d", "8p", "16p", "32p", "64p", "128p", "àtó_p",
   "8b", "16b", "32b", "64b", "128b", "àtó_b", "òtítọ́", "irọ́", "bóyá", "agbede",
-  "àkàyọ", "ọsán", "ǹjẹ́", "ibùta", "ibùrin", "òfìfo",
+  "wóró", "ọsán", "ǹjẹ́", "ibùta", "ibùrin", "ibùrin", "òfìfo",
   "àṣàyàn", "àyọrísí"
 ];
 
@@ -35,7 +35,7 @@ function provideContextualCompletions(document, position) {
 
   // If start of line or first non-whitespace char -> suggest top-level keywords
   if (/^\s*$/.test(before) || /^\s*[^\S\r\n]*$/.test(before)) {
-    KEYWORDS.filter(k => ["pitú","lo","apẹ̀rẹ̀","àjọ","kí","látinú"].includes(k)).forEach(k =>
+    KEYWORDS.filter(k => ["pitú","lo","apẹ̀rẹ̀","ìrísí","kí","látinú"].includes(k)).forEach(k =>
       add(k, vscode.CompletionItemKind.Keyword, k, "Kui top-level keyword")
     );
     // Add import snippet

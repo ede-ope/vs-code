@@ -6,9 +6,13 @@
 		{ "include": "#funcCustomTypes" },
 		{ "include": "#funcCustomTypes2" },
 		{ "include": "#modEntries" },
+		{ "include": "#documentations" },
     	{ "include": "#comments" },
     	{ "include": "#strings" },
     	{ "include": "#numbers" },
+		{ "include": "#importAs" },
+		{ "include": "#identPublic" },
+		{ "include": "#publicAs" },
     	{ "include": "#flags" },
 		{ "include": "#macroDecls" },
 		{ "include": "#typeVariant" },
@@ -37,7 +41,6 @@
 		{ "include": "#rangeOprs" },
 		{ "include": "#pointerOprs" },
 		{ "include": "#commands" },
-		{ "include": "#importFroms" },
 		{ "include": "#identifiers" }
   	],
   	"repository": {
@@ -50,10 +53,28 @@
 		  	]
 		},
 
-		"importFroms": {
-    	  	"match": "\\b(<-)\\s+([\\p{L}_][\\p{L}\\p{M}\\p{N}_]*)",
-			"captures": {
-    	  	  	"2": { "name": "entity.name.function.kui" }
+		"importAs": {
+			"match": "\\b([\\p{L}_][\\p{L}\\p{M}\\p{N}_]*)\\s+(nípè)",
+    	  	"captures": {
+    	  	  	"1": { "name": "variable.other.kui" },
+    	  	  	"2": { "name": "keyword.control.import.kui" }
+    	  	}
+    	},
+
+		"publicAs": {
+			"match": "\\b([\\p{L}_][\\p{L}\\p{M}\\p{N}_]*)\\s+(gbangba)\\s+(nípè)",
+    	  	"captures": {
+    	  	  	"1": { "name": "variable.other.kui" },
+				"2": { "name": "markup.italic.kui keyword.other.kui" },
+    	  	  	"3": { "name": "keyword.control.import.kui" }
+    	  	}
+    	},
+
+		"identPublic": {
+			"match": "\\b([\\p{L}_][\\p{L}\\p{M}\\p{N}_]*)\\s+(gbangba)",
+    	  	"captures": {
+    	  	  	"1": { "name": "variable.other.kui" },
+    	  	  	"2": { "name": "markup.italic.kui keyword.other.kui" }
     	  	}
     	},
 
@@ -66,6 +87,18 @@
     	      "end": "\\*/",
     	      "patterns": [{ "include": "#comments" }]
     	    }
+    	  ]
+    	},
+
+		"documentations": {
+    	  "patterns": [
+    	    { "name": "markup.bold.kui comment.line.double-slash.kui", "match": ";.*$" },
+    	    {
+				"name": "markup.italic.kui string.quoted.double.kui",
+				"begin": "\"\"\"", "end": "\"\"\"", "patterns": [
+					{ "match": "\\\\.", "name": "markup.italic.kui constant.character.escape.kui" }
+				]
+			}
     	  ]
     	},
 		
@@ -99,7 +132,7 @@
     	},
 
 		"structDecls": {
-			"match": "\\b(àjọ)\\s+([\\p{L}_][\\p{L}\\p{M}\\p{N}_]*)",
+			"match": "\\b(ìrísí)\\s+([\\p{L}_][\\p{L}\\p{M}\\p{N}_]*)",
     	  	"captures": {
     	  	  	"1": { "name": "storage.type.kui" },
     	  	  	"2": { "name": "entity.name.type.kui" }
@@ -127,7 +160,7 @@
     	  	"beginCaptures": {
     	  	  	"1": { "name": "keyword.other.kui" }
     	  	},
-    	  	"end": "$|\\{|kárí|mú|lo|afárá|apẹ̀rẹ̀|àjọ|itú|ìríjú|kékeré|túmọ̀|ogún|#",
+    	  	"end": "$|\\{|kárí|mú|lo|afárá|apẹ̀rẹ̀|ìrísí|itú|ìríjú|kékeré|túmọ̀|ogún|#",
     	  	"patterns": [
 				{
     	  	  	  	"name": "keyword.control.kui",
@@ -178,7 +211,7 @@
     	  	"patterns": [
     	  	  	{
     	  	  	  	"name": "storage.type.kui",
-    	  	  	  	"match": "\\b(àjọ|apẹ̀rẹ̀)\\b"
+    	  	  	  	"match": "\\b(ìrísí|apẹ̀rẹ̀)\\b"
     	  	  	}
     	  	]
     	},
@@ -225,7 +258,7 @@
     	  	"patterns": [
     	  	  	{
     	  	  	  	"name": "keyword.control.kui",
-    	  	  	  	"match": "\\b(gẹ́gẹ́bíi|dúróde|bẹ̀rẹ̀|yí|kó|pòrì|tí|àìjẹ́bẹ̀|ṣe|sí|fún|gbìyànjú|hán|ju|látinú|jọmọ́|níwọ̀bí|níbàámu|wo|jogún|tàṣé|máa_ṣa)\\b"
+    	  	  	  	"match": "\\b(nípè|dúróde|bẹ̀rẹ̀|yí|kó|pòrì|tí|àìjẹ́bẹ̀|ṣe|sí|fún|gbìyànjú|hán|ju|látinú|jọmọ́|níwọ̀bí|níbàámu|wo|jogún|tàṣé|máa_ṣa)\\b"
     	  	  	}
     	  	]
     	},
@@ -235,7 +268,7 @@
     	  	"patterns": [
     	  	  	{
     	  	  	  	"name": "support.type.kui",
-    	  	  	  	"match": "\\b(8d|16d|32d|64d|128d|àtó_d|8p|16p|32p|64p|128p|àtó_p|8b|16b|32b|64b|128b|àtó_b|àkàyọ|ọsán|ǹjẹ́|ibùta|òfìfo|àṣàyàn|àyọrísí)\\b"
+    	  	  	  	"match": "\\b(8d|16d|32d|64d|128d|àtó_d|8p|16p|32p|64p|128p|àtó_p|8b|16b|32b|64b|128b|àtó_b|wóró|ọsán|ǹjẹ́|ibùta|itùrin|òfìfo|àṣàyàn|àyọrísí)\\b"
     	  	  	}
     	  	]
     	},
