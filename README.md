@@ -1,15 +1,18 @@
-# Ope — VS Code language extension
+# Ọ̀pẹ — VS Code language extension
 
 Provides basic Ope language support:
 - Syntax highlighting (keywords, types, strings, numbers, imports, classes, structs, enums)
 - Language configuration (comments, brackets, auto-closing)
 - Context-aware IntelliSense (imports, types, snippets, top-level constructs)
 
-## Install / Test locally
+## Install
+...
+
+## Test locally
 1. Place this folder in e.g. `ope-vscode`.
 2. Open in VS Code.
 3. Press `F5` to run the Extension Development Host.
-4. Create a file `example.ope` and test keywords, `lo "..."`, `àtiṣe` declarations.
+4. Create a file `example.ope` and test keywords, `lo "..."`, `iṣẹ́` declarations.
 
 ## Notes
 - Extension sets `[ope]` defaults to disable `wordBasedSuggestions` and hide other snippets so other languages (JS, etc.) don't pollute suggestions.
