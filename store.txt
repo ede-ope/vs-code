@@ -3,4 +3,4 @@
     "increaseIndentPattern": "^(.*\\b(kí|yí|sọ||àtiṣe|ìpín|ẹ̀wun|apẹ̀tẹ̀|àkànto|ṣe|ṣé|pòòrì|tí)\\b.*|.*\\{[^\\}]*$)",
     "decreaseIndentPattern": "^\\s*\\}"
 }
-entity.name.type.kui, for custom types, support.type.kui for primitives
+entity.name.type.ope, for custom types, support.type.ope for primitives

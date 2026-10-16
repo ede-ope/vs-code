@@ -1,31 +1,31 @@
 {
-  	"name": "kui-language",
-  	"displayName": "Kui",
-  	"description": "Kui language support — syntax highlighting and basic IntelliSense.",
+  	"name": "ope-language",
+  	"displayName": "Ope",
+  	"description": "Ope language support — syntax highlighting and basic IntelliSense.",
   	"version": "0.2.0",
   	"publisher": "you",
   	"license": "MIT",
   	"engines": { "vscode": "^1.70.0" },
-  	"activationEvents": ["onLanguage:kui"],
+  	"activationEvents": ["onLanguage:ope"],
   	"main": "./extension.js",
   	"contributes": {
   	  	"languages": [
   	  	  	{
-  	  	  	  	"id": "kui",
-  	  	  	  	"aliases": ["Kui", "kui"],
-  	  	  	  	"extensions": [".kui"],
+  	  	  	  	"id": "ope",
+  	  	  	  	"aliases": ["Ope", "ope"],
+  	  	  	  	"extensions": [".ope"],
   	  	  	  	"configuration": "./language-configuration.json"
   	  	  	}
   	  	],
   	  	"grammars": [
   	  	  	{
-  	  	  	  	"language": "kui",
-  	  	  	  	"scopeName": "source.kui",
-  	  	  	  	"path": "./syntaxes/kui.tmLanguage.json"
+  	  	  	  	"language": "ope",
+  	  	  	  	"scopeName": "source.ope",
+  	  	  	  	"path": "./syntaxes/ope.tmLanguage.json"
   	  	  	}
   	  	],
   	  	"configurationDefaults": {
-  	  	  	"[kui]": {
+  	  	  	"[ope]": {
   	  	  	  	"editor.wordBasedSuggestions": false,
   	  	  	  	"editor.suggest.showSnippets": false
   	  	  	}

@@ -1,15 +1,5 @@
-"funcTypes": {
-			"match": "\\b(itú)(\\s|$)+([\\p{L}_][\\p{L}\\p{M}\\p{N}_]*)",
-    	  	"captures": {
-    	  	  	"1": { "name": "markup.italic.kui storage.type.kui" },
-    	  	  	"3": { "name": "entity.name.type.kui" }
-    	  	}
-    	},
+cd C:\Users\HP\Desktop\Ope\Ope_vs_ext\ope
 
-		"varTypes": {
-			"match": "\\b(kí)(\\s|$)+([\\p{L}_][\\p{L}\\p{M}\\p{N}_]*)",
-    	  	"captures": {
-    	  	  	"1": { "name": "markup.italic.kui storage.type.kui" },
-    	  	  	"3": { "name": "entity.name.type.kui" }
-    	  	}
-    	},
+New-Item -ItemType SymbolicLink `
+  -Path ".\syntaxes\ope.tmLanguage.json" `
+  -Target "C:\Users\HP\Desktop\Ope\syntaxes\ope.tmLanguage.json"

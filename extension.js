@@ -1,21 +1,21 @@
 const vscode = require('vscode');
 
 const KEYWORDS = [
-  "lo", "mú", "nípè", "òṣìṣẹ́", "itú", "adágún", "kí", "ní", "yí", "kó",
-  "kọ", "ka", "kékeré", "ìrísí",
+  "iṣẹ́", "lo", "mú", "pèéní", "bíi", "òṣìṣẹ́", "adágún", "kí", "ní", "yí", "kó",
+  "kọ", "ka", "àgánkọ", "ìrísí",
   "apẹ̀rẹ̀", "pòrì", "tí", "ṣe", "sí", "fún", "ré", "já", "wo",
   "àìjẹ́bẹ̀", "gbangba", "àdáni", "kárí", "jọmọ́", "òwun", "níwọ̀bí", "níbàámu",
-  "tóyí", "látòde", "afárá", "àfijọ", "ju", "hàn", "gbìyànjú", "hán",
-  "látinú", "túmọ̀", "ogún", "jogún", "pitú", "àbájáde", "àìwí",
-  "x86_64", "arm", "windows", "linux", "mac", "pẹpẹ",
+  "tóyí", "látòde", "afárá", "àfijọ", "ju", "síta", "sóde", "gbìyànjú", "hán",
+  "látinú", "túmọ̀", "ogún", "jogún", "àbájáde", "àìwí",
+  "X86", "Arm", "Windows", "Linux", "Darwin", "Android", "IOS", "àfojúsùn",
   "dúróde", "bẹ̀rẹ̀", "tàṣé", "máa_ṣa", "ry", "àfipè", "ìtúpayá",
 ];
 
 const TYPES = [
   "8d", "16d", "32d", "64d", "128d", "àtó_d", "8p", "16p", "32p", "64p", "128p", "àtó_p",
-  "8b", "16b", "32b", "64b", "128b", "àtó_b", "òtítọ́", "irọ́", "bóyá", "agbede",
-  "wóró", "ọsán", "ǹjẹ́", "ibùta", "ibùrin", "ibùrin", "òfìfo",
-  "àṣàyàn", "àyọrísí"
+  "8b", "16b", "32b", "64b", "128b", "àtó_b", "òtítọ́", "irọ́", "bóyá", "agbede", "àrọ́sí",
+  "wóró", "ọsán", "ǹjẹ́", "ibùta", "ibùrin", "ibùrin", "òfìfo", "òpin",
+  "Àṣàyàn", "Àyọrísí"
 ];
 
 function provideContextualCompletions(document, position) {
@@ -35,16 +35,16 @@ function provideContextualCompletions(document, position) {
 
   // If start of line or first non-whitespace char -> suggest top-level keywords
   if (/^\s*$/.test(before) || /^\s*[^\S\r\n]*$/.test(before)) {
-    KEYWORDS.filter(k => ["pitú","lo","apẹ̀rẹ̀","ìrísí","kí","látinú"].includes(k)).forEach(k =>
-      add(k, vscode.CompletionItemKind.Keyword, k, "Kui top-level keyword")
+    KEYWORDS.filter(k => ["iṣẹ́", "mú", "lo","apẹ̀rẹ̀","ìrísí","kí","àfijọ", "òṣìṣẹ́"].includes(k)).forEach(k =>
+      add(k, vscode.CompletionItemKind.Keyword, k, "Ope top-level keyword")
     );
     // Add import snippet
-    add('lo "module.kui"', vscode.CompletionItemKind.Module, new vscode.SnippetString('lo "${1:module.kui}"${2: ? alias};'), 'Import module');
+    add('lo "module.ope"', vscode.CompletionItemKind.Module, new vscode.SnippetString('lo "${1:module.ope}"${2: ? alias};'), 'Import module');
   }
 
   // If just typed `lo` or line starts with lo -> import suggestions
   if (/^\s*lo\s+["']?[^"']*$/.test(before)) {
-    add('"module.kui"', vscode.CompletionItemKind.File, new vscode.SnippetString('"${1:module.kui}"'), 'Module path');
+    add('"module.ope"', vscode.CompletionItemKind.File, new vscode.SnippetString('"${1:module.ope}"'), 'Module path');
     add('ìṣirò', vscode.CompletionItemKind.Module, 'ìṣirò', 'Standard library');
   }
 
@@ -74,13 +74,13 @@ function provideContextualCompletions(document, position) {
 
 function activate(context) {
   const provider = vscode.languages.registerCompletionItemProvider(
-    { language: 'kui' },
+    { language: 'ope' },
     {
       provideCompletionItems(document, position) {
         try {
           return provideContextualCompletions(document, position);
         } catch (err) {
-          console.error('Kui completion error', err);
+          console.error('Ope completion error', err);
           return [];
         }
       }
